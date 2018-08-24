@@ -1,10 +1,11 @@
 {
-  "applinks": {
-    "apps": [],
-    "details": {
-      "XW5558TH45.com.lianjia.beike": {
-        "paths":[ "*" ]
-      }
+    "applinks": {
+        "apps": [],
+        "details": [
+            {
+                "appID": "XW5558TH45.com.lianjia.HugeBuilding",
+                "paths": [ "*"]
+            }
+        ]
     }
-  }
 }
