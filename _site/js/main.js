@@ -2,7 +2,7 @@ $(document).ready(function() {
 
   $('a.blog-button').click(function() {
     // If already in blog, return early without animate overlay panel again.
-    if (location.hash && location.hash == "#blog") return;
+    if (location.hash && location.hash == "{{ site.baseurl }}/#blog") return;
     if ($('.panel-cover').hasClass('panel-cover--collapsed')) return;
     $('.main-post-list').removeClass('hidden');
     currentWidth = $('.panel-cover').width();
@@ -14,7 +14,7 @@ $(document).ready(function() {
     }
   });
 
-  if (window.location.hash && window.location.hash == "#blog") {
+  if (window.location.hash && window.location.hash == "{{ site.baseurl }}/#blog") {
     $('.panel-cover').addClass('panel-cover--collapsed');
     $('.main-post-list').removeClass('hidden');
   }
