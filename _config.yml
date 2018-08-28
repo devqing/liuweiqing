@@ -6,7 +6,7 @@ description: Vno Jekyll is a port of my Ghost theme vno.
 creator: <a href="http://onev.cat">@onevcat</a>
 
 url: "http://vno.onevcat.com"
-
+baseUrl: "/liuweiqing"
 permalink: /:year/:month/:title/
 
 # Format
