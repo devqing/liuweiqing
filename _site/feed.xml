@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Vno Jekyll</title>
+    <description>Vno Jekyll is a port of my Ghost theme vno.</description>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Tue, 28 Aug 2018 18:06:18 +0800</pubDate>
+    <lastBuildDate>Tue, 28 Aug 2018 18:06:18 +0800</lastBuildDate>
+    <generator>Jekyll v3.4.0</generator>
+    
+      <item>
+        <title>Charls使用</title>
+        <description>&lt;h1 id=&quot;charles的使用&quot;&gt;Charles的使用&lt;/h1&gt;
+
+&lt;p&gt;梳理了下Charles的功能，发现作为一个iOS开发者在使用过程中这么局限，仅仅使用了抓包（仅仅抓），所以重新整理了一下如下内容：&lt;/p&gt;
+
+&lt;h2 id=&quot;1-抓取http和https&quot;&gt;1 抓取HTTP和HTTPS&lt;/h2&gt;
+
+&lt;h3 id=&quot;1-安装charles-很多破解教程-不在赘述&quot;&gt;1.	安装Charles 很多破解教程 不在赘述&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;长这个样子&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;WechatIMG6846.jpeg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;2-开始http抓包&quot;&gt;2.	开始http抓包&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;1 先保证手机与电脑在同一wifi下 确保电脑可以连接网络  如：都连接了wiki网络  ke&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;WechatIMG160.jpeg&quot; alt=&quot;&quot; /&gt;&lt;img src=&quot;UNADJUSTEDNONRAW_thumb_4.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;查看当前电脑的IP，Charles 查看 Help-&amp;gt;Local IP Address&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;WechatIMG161.jpeg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;设置iPhone的网络代理到当前电脑的IP，并设置8888端口保存即可，也可自定义端口&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;WechatIMG162.jpeg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;抓到的包如下&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;WechatIMG164.jpeg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;如果是https 需要安装和设置证书 
+第一步安装电脑根证书
+&lt;img src=&quot;WechatIMG177.jpeg&quot; alt=&quot;&quot; /&gt;
+第二步信任根证书
+&lt;img src=&quot;WechatIMG178.jpeg&quot; alt=&quot;&quot; /&gt;
+第三步安装手机证书  在safari中输入chls.pro/ssh 安装即可
+&lt;img src=&quot;WechatIMG175.jpeg&quot; alt=&quot;&quot; /&gt;&lt;img src=&quot;WechatIMG176.jpeg&quot; alt=&quot;&quot; /&gt;
+第四步设置手机信任证书（两个地方）
+1 通用-&amp;gt;描述文件        2 通用-&amp;gt;关于本机-&amp;gt;证书信任设置
+设置抓取https的域名
+&lt;img src=&quot;WechatIMG180.jpeg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;2-修改网络请求参数&quot;&gt;2 修改网络请求参数&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;在通过Charles抓包的时候 发现给api的参数不对，常用的做法是端上修改下参数  重新请求一遍，这个是非常浪费时间的，尤其是大项目，即便是有cache的运行也需要一会（几分钟）但是这个时候如果用Charles直接修改参数是非常方便的。步骤如下&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;WechatIMG165.jpeg&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;WechatIMG166.jpeg&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;WechatIMG167.jpeg&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;WechatIMG171.jpeg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;3-支持网络请求的截取并修改&quot;&gt;3 支持网络请求的截取并修改&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;在通过Charles抓包的时候 我们需要兼容api给的数据 例如：有个模块需要根据api给的字段判断是否展示，但是这个时候api给的可能都是mock出来的，都是有的，我们要测下兼容性，如果该字段不给或者给了个null会怎样，这个时候就会用到修改网络请求结果数据&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;WechatIMG172.jpeg&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;WechatIMG173.jpeg&quot; alt=&quot;&quot; /&gt;
+&lt;img src=&quot;WechatIMG174.jpeg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;注意事项及说明&quot;&gt;注意事项及说明&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;WechatIMG181.jpeg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;1 在尝试修改Breakpoints的response的时候 参数一定要一模一样&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;其他&quot;&gt;其他&lt;/h2&gt;
+
+&lt;p&gt;上述只列出一些常用的功能，还有其他很多功能，模拟网络，自定义端口等等，谢谢！&lt;/p&gt;
+</description>
+        <pubDate>Mon, 27 Aug 2018 00:00:00 +0800</pubDate>
+        <link>http://localhost:4000/2018/08/Charls%E4%BD%BF%E7%94%A8/</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/08/Charls%E4%BD%BF%E7%94%A8/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Hello World - Vno</title>
+        <description>&lt;h4 id=&quot;whats-this&quot;&gt;What’s this&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/onevcat/vno-jekyll&quot;&gt;Vno Jekyll&lt;/a&gt; is a theme for &lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll&lt;/a&gt;. It is a port of my Ghost theme &lt;a href=&quot;https://github.com/onevcat/vno&quot;&gt;vno&lt;/a&gt;, which is originally developed from &lt;a href=&quot;https://github.com/daleanthony/uno&quot;&gt;Dale Anthony’s Uno&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h4 id=&quot;usage&quot;&gt;Usage&lt;/h4&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;git clone https://github.com/onevcat/vno-jekyll.git your_site
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;your_site
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;bundler install
+&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;bundler &lt;span class=&quot;nb&quot;&gt;exec &lt;/span&gt;jekyll serve
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;Your site with &lt;code class=&quot;highlighter-rouge&quot;&gt;Vno Jekyll&lt;/code&gt; enabled should be accessible in http://127.0.0.1:4000.&lt;/p&gt;
+
+&lt;p&gt;For more information about Jekyll, please visit &lt;a href=&quot;http://jekyllrb.com&quot;&gt;Jekyll’s site&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h4 id=&quot;configuration&quot;&gt;Configuration&lt;/h4&gt;
+
+&lt;p&gt;All configuration could be done in &lt;code class=&quot;highlighter-rouge&quot;&gt;_config.yml&lt;/code&gt;. Remember you need to restart to serve the page when after changing the config file. Everything in the config file should be self-explanatory.&lt;/p&gt;
+
+&lt;h4 id=&quot;background-image-and-avatar&quot;&gt;Background image and avatar&lt;/h4&gt;
+
+&lt;p&gt;You could replace the background and avatar image in &lt;code class=&quot;highlighter-rouge&quot;&gt;assets/images&lt;/code&gt; folder to change them.&lt;/p&gt;
+
+&lt;h4 id=&quot;sites-using-vno&quot;&gt;Sites using Vno&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://onevcat.com&quot;&gt;My blog&lt;/a&gt; is using &lt;code class=&quot;highlighter-rouge&quot;&gt;Vno Jekyll&lt;/code&gt; as well, you could see how it works in real. There are some other sites using the same theme. You can find them below:&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Site Name&lt;/th&gt;
+      &lt;th&gt;URL&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;OneV’s Den&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;http://onevcat.com&quot;&gt;http://onevcat.com&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;July Tang&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;http://onevcat.com&quot;&gt;http://blog.julytang.xyz&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Harry Lee&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;http://qiuqi.li&quot;&gt;http://qiuqi.li&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;If you happen to be using this theme, welcome to &lt;a href=&quot;https://github.com/onevcat/vno-jekyll/pulls&quot;&gt;send me a pull request&lt;/a&gt; to add your site link here. :)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;license&quot;&gt;License&lt;/h4&gt;
+
+&lt;p&gt;Great thanks to &lt;a href=&quot;https://github.com/daleanthony&quot;&gt;Dale Anthony&lt;/a&gt; and his &lt;a href=&quot;https://github.com/daleanthony/uno&quot;&gt;Uno&lt;/a&gt;. Vno Jekyll is based on Uno, and contains a lot of modification on page layout, animation, font and some more things I can not remember. Vno Jekyll is followed with Uno and be licensed as &lt;a href=&quot;http://creativecommons.org/licenses/by/4.0/&quot;&gt;Creative Commons Attribution 4.0 International&lt;/a&gt;. See the link for more information.&lt;/p&gt;
+</description>
+        <pubDate>Tue, 16 Feb 2016 14:32:24 +0800</pubDate>
+        <link>http://localhost:4000/2016/02/hello-world-vno/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/02/hello-world-vno/</guid>
+        
+        
+      </item>
+    
+      <item>
+        <title>Sample Post</title>
+        <description>&lt;p&gt;You’ll find this post in your &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run &lt;code class=&quot;highlighter-rouge&quot;&gt;jekyll serve&lt;/code&gt;, which launches a web server and auto-regenerates your site when a file is updated.&lt;/p&gt;
+
+&lt;p&gt;To add new posts, simply add a file in the &lt;code class=&quot;highlighter-rouge&quot;&gt;_posts&lt;/code&gt; directory that follows the convention &lt;code class=&quot;highlighter-rouge&quot;&gt;YYYY-MM-DD-name-of-post.ext&lt;/code&gt; and includes the necessary front matter. Take a look at the source for this post to get an idea about how it works.&lt;/p&gt;
+
+&lt;p&gt;Jekyll also offers powerful support for code snippets:&lt;/p&gt;
+
+&lt;figure class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;Hi, &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;#{&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;print_hi&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;'Tom'&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;#=&amp;gt; prints 'Hi, Tom' to STDOUT.&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/figure&gt;
+
+&lt;p&gt;Check out the &lt;a href=&quot;http://jekyllrb.com/docs/home&quot;&gt;Jekyll docs&lt;/a&gt; for more info on how to get the most out of Jekyll. File all bugs/feature requests at &lt;a href=&quot;https://github.com/jekyll/jekyll&quot;&gt;Jekyll’s GitHub repo&lt;/a&gt;. If you have questions, you can ask them on &lt;a href=&quot;https://talk.jekyllrb.com/&quot;&gt;Jekyll Talk&lt;/a&gt;.&lt;/p&gt;
+
+</description>
+        <pubDate>Mon, 15 Feb 2016 14:32:24 +0800</pubDate>
+        <link>http://localhost:4000/2016/02/sample-post/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/02/sample-post/</guid>
+        
+        
+      </item>
+    
+  </channel>
+</rss>
